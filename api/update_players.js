@@ -12,3 +12,4 @@ module.exports = (req, res) => {
   // You can use the 'data' variable to update your database here
   res.send({message :"welcome to the server !"});
 };
+

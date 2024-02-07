@@ -12,6 +12,9 @@ module.exports = (req, res) => {
     if (err) {
       return res.status(500).json({ error: 'Database query failed' });
     }
-    res.json(results);
+    res.send("hello welcome to the server")
+    // res.json(results);
   });
 };
+
+
