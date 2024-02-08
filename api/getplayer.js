@@ -1,6 +1,5 @@
 const mysql = require('mysql2');
-
-const mysql = require('mysql2');
+;
 const user_input  = "john"
 const connection = mysql.createConnection({
   host: 'localhost',
@@ -24,7 +23,7 @@ module.exports = (req, res) => {
         
     }
     catch{
-        res.send(err)
+        res.send("theres a problem")
     }
 //   });
 };
