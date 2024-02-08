@@ -1,5 +1,4 @@
 const mysql = require('mysql2');
-const Server = require('tailwind/dist/wires/api/http/Server');
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -60,10 +59,6 @@ function find_exist(user_input){
 }
 
 
-
-function db_actions(){
-
-}
 module.exports = (req, res) => {
     // let user_data = req.body
     // find_exist(user_data)
