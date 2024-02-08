@@ -15,8 +15,13 @@ module.exports = (req, res) => {
         connection.query('SELECT * FROM leaderboard_cps.test', (err, results) => {
             if (err) {
               return res.status(500).json({ error: 'Database query failed' });
-            }});
-        res.send("connected to the database successfully")
+            }
+            else{            
+                res.send("connected to the database successfully")
+            }
+
+        });
+        
     }
     catch{
         res.send(err)
