@@ -16,6 +16,7 @@ module.exports = (req, res) => {
             if (err) {
               return res.status(500).json({ error: 'Database query failed' });
             }});
+        res.send("connected to the database successfully")
     }
     catch{
         res.send(err)
