@@ -11,9 +11,8 @@ const pool  = mysql.createPool({
 module.exports = (req, res) => {
     pool.query('SELECT * FROM leaderboard_cps.test', (err, results) => {
         if (err) {
-            res.send(err)
+            console.error(err);
             return res.status(500).json({ error: 'Database query failed' });
-            
         }
         res.send("Connected to the database successfully");
     });
