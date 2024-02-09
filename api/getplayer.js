@@ -12,10 +12,10 @@ module.exports = (req, res) => {
     pool.query('SELECT * FROM leaderboard_cps.test', (err, results) => {
         if (err) {
             console.error(err);
-            results.send(err)
+            res.send(err)
             return res.status(500).json({ error: 'Database query failed' });
             
         }
-        results.send("Connected to the database successfully");
+        res.send("Connected to the database successfully");
     });
 };
