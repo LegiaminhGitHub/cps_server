@@ -8,6 +8,7 @@ const pool = mysql.createPool({
 });
 
 module.exports = (req, res) => {
+    res.send("welcome to the server")
     pool.query('SELECT * FROM leaderboard_cps.test', (err, results) => {
         if (err) {
             console.error(err);
