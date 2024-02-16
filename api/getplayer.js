@@ -1,9 +1,9 @@
 const mysql = require('mysql2');
 const pool  = mysql.createPool({
-  host: 'sql108.infinityfree.com',
-  user: 'if0_35940057',
-  password: 'iuUaS2qActscHxo',
-  database: 'if0_35940057_XXX',
+  host: 'localhost',
+  user: 'id21883367_legiaminh',
+  password: 'Cps_server_db##16050356',
+  database: 'id21883367_cps_prod',
   port: 3307
 });
 
