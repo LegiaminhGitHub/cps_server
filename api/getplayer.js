@@ -12,7 +12,7 @@ module.exports = (req, res) => {
 
     messages["message"].push("Welcome to the server");
 
-    pool.query('SELECT * FROM leaderboard_cps.test', (err, results) => {
+    pool.query('SELECT * FROM cps_db_prod.data_cps_5secs', (err, results) => {
         if (err) {
             console.error(err);
             messages["message"].push("Cannot connect to the database");
