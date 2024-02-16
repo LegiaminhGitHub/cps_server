@@ -1,12 +1,11 @@
 const mysql = require('mysql2');
-const pool  = mysql.createPool({
-  host: "https://clickpersecond-web.000webhostapp.com/",
-  user: 'id21883367_legiaminh',
-  password: 'Cps_server_db##16050356',
-  database: 'id21883367_cps_prod',
-  port: 3307
+const pool = mysql.createPool({
+    host: "sql6.freesqldatabase.com	",
+    user: 'sql6684534',
+    password: '3V5Yxi9YXk',
+    database: 'sql6684534',
+    port: 3306,
 });
-
 
 module.exports = (req, res) => {
     pool.query('SELECT * FROM leaderboard_cps.test', (err, results) => {
