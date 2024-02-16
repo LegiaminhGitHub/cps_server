@@ -1,6 +1,6 @@
 const mysql = require('mysql2');
 const pool  = mysql.createPool({
-  host: 'localhost',
+  host: "https://clickpersecond-web.000webhostapp.com/",
   user: 'id21883367_legiaminh',
   password: 'Cps_server_db##16050356',
   database: 'id21883367_cps_prod',
