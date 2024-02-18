@@ -1,9 +1,9 @@
 const mysql = require('mysql2');
 const pool = mysql.createPool({
     host: "sql6.freesqldatabase.com",
-    user: 'sql6684534',
-    password: '3V5Yxi9YXk',
-    database: 'sql6684534',
+    user: 'sql6685041',
+    password: '6bLnfPml6R',
+    database: 'sql6685041',
     port: 3306,
 });
 
@@ -12,7 +12,7 @@ module.exports = (req, res) => {
 
     messages["message"].push("Welcome to the server");
 
-    pool.query('SELECT * FROM cps_db_prod.data_cps_5secs', (err, results) => {
+    pool.query('SELECT * FROM cps_db_prod.five_secs_data', (err, results) => {
         if (err) {
             console.error(err);
             messages["message"].push("Cannot connect to the database");
