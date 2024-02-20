@@ -1,6 +1,6 @@
 const admin = require('firebase-admin');
 
-const serviceAccount = require('./click-per-second-web-firebase-adminsdk-8y5vt-50ce8c8b7b.json');
+const serviceAccount = require('../click-per-second-web-firebase-adminsdk-8y5vt-50ce8c8b7b.json');
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: 'https://click-per-second-web-default-rtdb.asia-southeast1.firebasedatabase.app',
@@ -13,8 +13,7 @@ const myData = {
 };
 
 // Access the Realtime Database
-const db = admin.database();
-const usersRef = db.ref('users');
+;
 
 async function addUserIfNotExists(userId) {
   try {
@@ -42,11 +41,21 @@ async function addUserIfNotExists(userId) {
 
 // Example usage:
 // addUserIfNotExists('mike'); // Replace with the actual user ID
-
+var messsages = {"mess" : []}
 
 module.exports = (req, res) => {
+  messsages["mess"].push("welcome to the server")
   var data = req.body;
+  messsages["mess"].push(data)
+  try{  const db = admin.database();
+    const usersRef = db.ref('users');
+    messsages["mess"].push("connected tofirebase server")
+  }
+  catch(error){
+    messsages["mess"].push("connection to firebase failed")
+    res.send({messages})
+  }
+  res.send({messages})
   // You can use the 'data' variable to update your database here
-  res.send({message :`welcome to the server ! ${data}`});
 };
 
