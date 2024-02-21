@@ -8,6 +8,7 @@ module.exports = async (req, res) => {
     messages["mess"].push(data); // Assuming data is defined elsewhere
 
     try {
+      const admin = require('firebase-admin');
       const db = admin.database();
       const usersRef = db.ref('users');
       messages["mess"].push("Connected to Firebase server"); // Successfully connected
