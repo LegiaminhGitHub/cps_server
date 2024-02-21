@@ -55,11 +55,11 @@ module.exports = (req, res) => {
       messsages["mess"].push("connection to firebase failed")
       res.send(messsages)
     }
-    res.send(messages)
     // You can use the 'data' variable to update your database here
   }
   catch(error){
     res.send(error)
   }
+  res.send(messages)
 };
 
