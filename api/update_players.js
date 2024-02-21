@@ -1,5 +1,7 @@
 // const admin = require('firebase-admin');
 
+const { json } = require("express");
+
 // // Load service account credentials from a JSON file
 // const serviceAccount = require('./click-per-second-web-firebase-adminsdk-8y5vt-50ce8c8b7b.json');
 
@@ -44,8 +46,10 @@ module.exports = async (req, res) => {
       const usersRef = db.ref('users');
       messages["mess"].push("Connected to Firebase server"); // Successfully connected
     } catch (error) {
-      messages["mess"].push("Connection to Firebase failed"); // Handle connection error
-      res.send(messages);
+      messages["mess"].push("Connection to Firebase failed")
+      messages["mess"].push("Connection to Firebase failed")
+      ; // Handle connection error
+      res.json(messages);
       return; // Exit the function
     }
 
