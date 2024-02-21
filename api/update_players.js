@@ -36,6 +36,7 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: 'https://click-per-second-web-default-rtdb.asia-southeast1.firebasedatabase.app',
 });
+module.exports = admin;
 module.exports = async (req, res) => {
   // Initialize the messages object
   const messages = { "mess": [] };
