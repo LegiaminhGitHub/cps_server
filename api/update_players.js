@@ -38,9 +38,10 @@ async function addUserIfNotExists(userId) {
 
 // Example usage:
 // addUserIfNotExists('mike'); // Replace with the actual user ID
-var messsages = {"mess" : []}
+
 
 module.exports = (req, res) => {
+  var messsages = {"mess" : []}
   try{
     messsages["mess"].push("welcome to the server")
     // var data = req.body;
