@@ -46,8 +46,8 @@ module.exports = async (req, res) => {
       const usersRef = db.ref('users');
       messages["mess"].push("Connected to Firebase server"); // Successfully connected
     } catch (error) {
-      messages["mess"].push("Connection to Firebase failed")
       messages["mess"].push(string(error))
+      messages["mess"].push("Connection to Firebase failed")
       ; // Handle connection error
       res.json(messages);
       return; // Exit the function
