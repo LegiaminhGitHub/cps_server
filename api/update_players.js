@@ -1,7 +1,11 @@
 // const admin = require('firebase-admin');
 
 const { json } = require("express");
-
+const myData = {
+  cps: 9.4,
+  score: 36,
+};
+const messages = { "mess": [] };
 // // Load service account credentials from a JSON file
 // const serviceAccount = require('./click-per-second-web-firebase-adminsdk-8y5vt-50ce8c8b7b.json');
 
@@ -31,10 +35,35 @@ const { json } = require("express");
 //     res.status(500).json({ error: 'Internal server error' });
 //   }
 // };
+async function addUserIfNotExists(userId) {
+  try {
+    const snapshot = await usersRef.child(userId).once('value');
+    const userData = snapshot.val();
+
+    if (!userData) {
+      // User doesn't exist, add new data
+      await usersRef.child(userId).set(myData);
+      console.log(`User ${userId} added`);
+      messages["mess"].push(`User ${userId} added`)
+    } else {
+      console.log(`User ${userId} already exists`);
+      messages["mess"].push(`User ${userId} already exists`)
+      try{
+        await usersRef.child(userId).update(myData);
+        console.log("user updated")
+        messages["mess"].push("user updated")
+      }
+      catch(error){
+        console.log(`theres a problem with the update please try again later \n ${err}`)
+      }
+    }
+  } catch (error) {
+    console.error('Error checking or adding user:', error);
+  }
+}
 
 module.exports = async (req, res) => {
   // Initialize the messages object
-  const messages = { "mess": [] };
 
   try {
     messages["mess"].push("Welcome to the server");
@@ -44,11 +73,13 @@ module.exports = async (req, res) => {
     try {
       const db = admin.database();
       const usersRef = db.ref('users');
-      messages["mess"].push("Connected to Firebase server"); // Successfully connected
+      messages["mess"].push("Connected to Firebase server")
+      addUserIfNotExists("mike"); // Successfully connected
     } catch (error) {
 
       messages["mess"].push(error)
       messages["mess"].push("Connection to Firebase failed")
+      addUserIfNotExists("mike")
       ; // Handle connection error
       res.json(messages);
       return; // Exit the function
