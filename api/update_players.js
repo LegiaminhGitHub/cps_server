@@ -30,7 +30,6 @@
 //   }
 // };
 
-module.exports = admin;
 module.exports = async (req, res) => {
   // Initialize the messages object
   const messages = { "mess": [] };
