@@ -41,25 +41,26 @@ async function addUserIfNotExists(userId) {
 
 
 module.exports = (req, res) => {
-  var messsages = {"mess" : []}
-  try{
-    messsages["mess"].push("welcome to the server")
-    // var data = req.body;
-    messsages["mess"].push(data)
-    try{  
-      const db = admin.database();
-      const usersRef = db.ref('users');
-      messsages["mess"].push("connected tofirebase server")
-    }
-    catch(error){
-      messsages["mess"].push("connection to firebase failed")
-      res.send({messages})
-    }
-    res.send({messages})
-    // You can use the 'data' variable to update your database here
-  }
-  catch(error){
-    res.send(error)
-  }
+  // var messsages = {"mess" : []}
+  // try{
+  //   messsages["mess"].push("welcome to the server")
+  //   // var data = req.body;
+  //   messsages["mess"].push(data)
+  //   try{  
+  //     const db = admin.database();
+  //     const usersRef = db.ref('users');
+  //     messsages["mess"].push("connected tofirebase server")
+  //   }
+  //   catch(error){
+  //     messsages["mess"].push("connection to firebase failed")
+  //     res.send({messages})
+  //   }
+  //   res.send({messages})
+  //   // You can use the 'data' variable to update your database here
+  // }
+  // catch(error){
+  //   res.send(error)
+  // }
+  res.send("welcome bro")
 };
 
