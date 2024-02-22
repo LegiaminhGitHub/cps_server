@@ -4,7 +4,6 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: 'https://click-per-second-web-default-rtdb.asia-southeast1.firebasedatabase.app',
 });
-
 const { json } = require("express");
 const myData = {
   cps: 9.4,
@@ -21,10 +20,8 @@ async function addUserIfNotExists(userId) {
       // User doesn't exist, add new data
       await usersRef.child(userId).set(myData);
       messages["mess"].push(`User ${userId} added`);
-      res.json(messages)
     } else {
       messages["mess"].push(`User ${userId} already exists`);
-      res.json(messages)
       try {
         await usersRef.child(userId).update(myData);
         messages["mess"].push("User updated");
@@ -35,7 +32,6 @@ async function addUserIfNotExists(userId) {
   } catch (error) {
     messages["mess"].push("Connection to Firebase failed");
     messages["mess"].push(`Error: ${error.message}`);
-    res.json(messages)
   }
 }
 
