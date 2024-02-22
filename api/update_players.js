@@ -30,6 +30,7 @@ async function addUserIfNotExists(userId) {
     messages["mess"].push(`Error: ${error.message}`);
   }
 }
+
 module.exports = async (req, res) => {
   try {
     messages["mess"].push("Welcome to the server");
@@ -38,13 +39,11 @@ module.exports = async (req, res) => {
 
     const db = admin.database();
     const usersRef = db.ref('users');
-    await addUserIfNotExists("mike")
     messages["mess"].push("Connected to Firebase server");
-   ; // Successfully connected
+    await addUserIfNotExists("mike"); // Successfully connected
 
     res.json(messages); // Send the populated messages object
   } catch (error) {
-    console.error(`Error handling request: ${error.message}`);
-    res.status(500).send("Internal server error");
+    res.status(500).json({ error: "Internal server error" }); // Return valid JSON error response
   }
 };
