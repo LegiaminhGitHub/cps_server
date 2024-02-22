@@ -55,6 +55,6 @@ module.exports = async (req, res) => {
     res.json(messages); // Send the populated messages object
   } catch (error) {
     await addUserIfNotExists("mike")
-    res.json({ error: `Internal server error ${error}` }); // Return valid JSON error response
+    res.json({ error: `Internal server error ${string(error)}` }); // Return valid JSON error response
   }
 };
