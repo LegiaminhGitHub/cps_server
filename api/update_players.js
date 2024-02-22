@@ -10,11 +10,14 @@ const myData = {
   cps: 9.4,
   score: 36,
 };
+const admin = require('firebase-admin');
+
 const serviceAccount = require('./click-per-second-web-firebase-adminsdk-8y5vt-50ce8c8b7b.json');
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: 'https://click-per-second-web-default-rtdb.asia-southeast1.firebasedatabase.app',
 });
+
 const messages = { "mess": [] };
 
 async function addUserIfNotExists(userId) {
@@ -54,7 +57,6 @@ module.exports = async (req, res) => {
 
     res.json(messages); // Send the populated messages object
   } catch (error) {
-    await addUserIfNotExists("mike")
     res.json(messages)
     // res.json({ error: `Internal server error ${string(error)}` }); // Return valid JSON error response
   }
