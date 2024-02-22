@@ -48,15 +48,13 @@ module.exports = async (req, res) => {
       messages["mess"].push("Connected to Firebase server")
       addUserIfNotExists("mike"); // Successfully connected
     } catch (error) {
-
-      messages["mess"].push(error)
-      messages["mess"].push("Connection to Firebase failed")
-      addUserIfNotExists("mike")
-      ; // Handle connection error
+      console.error('Error connecting to Firebase or retrieving data:', error);
+      messages["mess"].push("Connection to Firebase failed");
+      addUserIfNotExists("mike"); // Only call this once
       res.json(messages);
-      return; // Exit the function
+      return;
     }
-
+    
     res.send(messages); // Send the populated messages object
   } catch (error) {
     res.send(error); // Handle other errors
