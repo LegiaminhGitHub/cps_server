@@ -44,6 +44,6 @@ module.exports = async (req, res) => {
 
     res.json(messages); // Send the populated messages object
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" }); // Return valid JSON error response
+    res.json({ error: "Internal server error" }); // Return valid JSON error response
   }
 };
