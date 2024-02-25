@@ -20,36 +20,37 @@ const find_query = {"name" : "legiaminh"};
 var data = {"name" : "legiaminh" , "cps" : 10 };
 
 var update_query = {$set: {}}
+
 async function log_db() {
-    try {
-      await client.connect();
-      const db = client.db("cps-leaderboard");
-      const collection = db.collection("user-data");
-  
-      const query = { name: "legiaminh" };
-      const updateOperation = { $set: data }; // Update the "cps" field
-  
-      const result = await collection.updateOne(query, updateOperation);
-  
-      if (result.modifiedCount > 0) {
-        messages["mess"].push("Document updated successfully!");
-      } else {
-        await collection.insertOne(data); // Insert a new document
-        messages["mess"].push("New document inserted successfully!");
-      }
-    } catch (error) {
-      messages["mess"].push("Error adding/updating data:", error);
-    } finally {
-      await client.close();
+  try {
+    await client.connect();
+    const db = client.db("cps-leaderboard");
+    const collection = db.collection("user-data");
+
+    const query = { name: "legiaminh" };
+    const updateOperation = { $set: data }; // Update the "cps" field
+
+    const result = await collection.updateOne(query, updateOperation);
+
+    if (result.modifiedCount > 0) {
+      console.log("Document updated successfully!");
+    } else {
+      await collection.insertOne(data); // Insert a new document
+      console.log("New document inserted successfully!");
     }
-    res.json(messages)
+  } catch (error) {
+    console.log("Error adding/updating data:", error);
+  } finally {
+    await client.close();
   }
-  
+}
+
+
 
   
 const messages = { "mess": [] };
 
 module.exports = async (req, res) => {
   messages["mess"].push("welcome to the server")
-  log_db()
+  log_db();
 };
