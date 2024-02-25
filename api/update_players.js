@@ -39,6 +39,6 @@ async function log_db() {
 
 module.exports = async (req, res) => {
   messages.mess.push("Welcome to the server");
-  await log_db(); // Wait for update to finish before sending response
+  // await log_db(); // Wait for update to finish before sending response
   res.json(messages);
 };
