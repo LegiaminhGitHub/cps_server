@@ -22,12 +22,14 @@ async function log_db() {
 
     if (result.modifiedCount > 0) {
       messages.mess.push("Document updated successfully!");
+      res.json(messages);
     } else {
       await collection.insertOne(data); // Insert a new document
       messages.mess.push("New document inserted successfully!");
     }
   } catch (error) {
     messages.mess.push("Error adding/updating data:", error);
+    res.json(messages);
   } finally {
     res.json(messages);
     await client.close();
