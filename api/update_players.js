@@ -47,9 +47,6 @@ async function log_db() {
   
 
   
-
-log_db()
-
 const messages = { "mess": [] };
 
 module.exports = async (req, res) => {
