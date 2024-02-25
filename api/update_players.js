@@ -12,9 +12,8 @@ const myData = {
   score: 36,
 };
 
-
+const messages = { "mess": [] };
 const uri = 'mongodb+srv://legiaminhoffice:16050356@newdatabase.idp7hup.mongodb.net/?retryWrites=true&w=majority&appName=newdatabase'; // Your MongoDB URI
-
 const client = new MongoClient(uri);
 const find_query = {"name" : "legiaminh"};
 var data = {"name" : "legiaminh" , "cps" : 10 };
@@ -39,7 +38,7 @@ async function log_db() {
       console.log("New document inserted successfully!");
     }
   } catch (error) {
-    console.log("Error adding/updating data:", error);
+    messages["mess"].push("Error adding/updating data:", error);
   } finally {
     await client.close();
   }
@@ -48,7 +47,6 @@ async function log_db() {
 
 
   
-const messages = { "mess": [] };
 
 module.exports = async (req, res) => {
   messages["mess"].push("welcome to the server")
