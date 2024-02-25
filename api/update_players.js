@@ -54,5 +54,5 @@ const messages = { "mess": [] };
 module.exports = async (req, res) => {
   messages["mess"].push("welcome to the server")
   log_db()
-  res.send(messages)
+  res.json(messages)
 };
