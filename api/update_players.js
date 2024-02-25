@@ -42,6 +42,7 @@ async function log_db() {
     } finally {
       await client.close();
     }
+    res.json(messages)
   }
   
 
@@ -54,5 +55,4 @@ const messages = { "mess": [] };
 module.exports = async (req, res) => {
   messages["mess"].push("welcome to the server")
   log_db()
-  res.json(messages)
 };
