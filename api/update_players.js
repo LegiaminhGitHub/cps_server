@@ -21,14 +21,15 @@ async function log_db() {
     const result = await collection.updateOne(query, updateOperation);
 
     if (result.modifiedCount > 0) {
-      console.log("Document updated successfully!");
+      messages.mess.push("Document updated successfully!");
     } else {
       await collection.insertOne(data); // Insert a new document
-      console.log("New document inserted successfully!");
+      messages.mess.push("New document inserted successfully!");
     }
   } catch (error) {
-    console.log("Error adding/updating data:", error);
+    messages.mess.push("Error adding/updating data:", error);
   } finally {
+    res.json(messages);
     await client.close();
   }
 }
@@ -36,6 +37,5 @@ async function log_db() {
 
 module.exports = async (req, res) => {
   messages.mess.push("Welcome to the server");
-  // await log_db(); // Wait for update to finish before sending response
-  res.json(messages);
+  await log_db();
 };
