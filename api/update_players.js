@@ -15,27 +15,24 @@ async function log_db() {
     const db = client.db("cps-leaderboard");
     const collection = db.collection("user-data");
 
-    const nameToUpdate = "legiaminh"; // Replace with the actual name to update
+    const query = { name: "legiaminh" };
+    const updateOperation = { $set: data }; // Update the "cps" field
 
-    const updateData = { $set: { cps: 10 } }; // Update the "cps" field
-
-    const result = await collection.updateOne({ name: nameToUpdate }, updateData);
+    const result = await collection.updateOne(query, updateOperation);
 
     if (result.modifiedCount > 0) {
       console.log("Document updated successfully!");
-      messages.mess.push("Document updated successfully!");
     } else {
-      const insertResult = await collection.insertOne({ name: nameToUpdate, ...myData }); // Insert if not found
+      await collection.insertOne(data); // Insert a new document
       console.log("New document inserted successfully!");
-      messages.mess.push("New document inserted successfully!");
     }
   } catch (error) {
-    console.error("Error adding/updating data:", error);
-    messages.mess.push("Error adding/updating data:", error);
+    console.log("Error adding/updating data:", error);
   } finally {
     await client.close();
   }
 }
+
 
 module.exports = async (req, res) => {
   messages.mess.push("Welcome to the server");
