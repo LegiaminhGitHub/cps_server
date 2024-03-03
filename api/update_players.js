@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-require('dotenv').config({ path: './api/.env' });
+require('dotenv').config();
 
 const myDataSchema = new mongoose.Schema({
   name: String,
