@@ -36,16 +36,13 @@ async function log_db() {
     const result = await collection.updateOne(query, updateOperation); // Perform the update
 
     if (result.modifiedCount > 0) {
-      console.log("Document updated successfully!");
       messages["mess"].push('Document updated successfully!')
       
     } else {
       await collection.insertOne(myData); // Insert a new document if not found
-      console.log("New document inserted successfully!");
       messages["mess"].push('New document inserted successfully!')
     }
-  } catch (error) {
-    console.error("Error adding/updating data:", error);
+  } catch (error) {;
     messages["mess"].push(`Error adding/updating data:, ${error}`)
   } finally {
     await client.close(); // Close the MongoDB connection
