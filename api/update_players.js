@@ -14,17 +14,11 @@ const myData = {
 const MyDataModel = mongoose.model('MyData', myDataSchema);
 
 async function connectToMongoDB() {
-  try {
     await mongoose.connect(process.env.MGDB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-  } catch (error) {
-    myData = {
-      cps: 9.4,
-      score: 36,
-    };
-  }
+
 }
 
 module.exports = async (req, res) => {
