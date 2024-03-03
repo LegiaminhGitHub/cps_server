@@ -34,12 +34,10 @@ module.exports = async (req, res) => {
       console.log('Document updated/inserted successfully:', result);
       res.send('Action completed');
     } else {
-      console.error('Error updating/inserting data');
-      res.status(500).json({ error: 'Internal server error' });
+      res.json({ error: `Internal server error${error}` });
     }
   } catch (error) {
-    console.error('Error:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.json({ error: `Internal server error${error}` });
   }
 };
 
