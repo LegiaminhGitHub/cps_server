@@ -5,6 +5,11 @@ const myDataSchema = new mongoose.Schema({
   cps: Number,
   score: Number,
 });
+const myData = {
+  name:"legiaminh",
+  cps: 9.4,
+  score: 36,
+};
 
 const MyDataModel = mongoose.model('MyData', myDataSchema);
 
