@@ -1,5 +1,5 @@
 const { MongoClient } = require('mongodb');
-require('dotenv').config({ path: './api/.env' });
+// require('dotenv').config({ path: './api/.env' });
 
 const myData = {
   cps: 9.4,
@@ -11,7 +11,7 @@ let client; // Declare the client variable at a higher scope
 
 async function connectToMongoDB() {
   try {
-    const uri = process.env.MGDB_URI;
+    // const uri = process.env.MGDB_URI;
     client = new MongoClient("mongodb+srv://legiaminhoffice:16050356@newdatabase.idp7hup.mongodb.net/?retryWrites=true&w=majority&appName=newdatabase", { useNewUrlParser: true, useUnifiedTopology: true });
 
     await client.connect();
