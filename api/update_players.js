@@ -1,17 +1,30 @@
-const { MongoClient, Db } = require('mongodb');
+const { MongoClient } = require('mongodb');
 
 const myData = {
   cps: 9.4,
   score: 36,
 };
 
-const messages = { mess: [] };
-const uri = 'mongodb+srv://legiaminhoffice:16050356@newdatabase.idp7hup.mongodb.net/?retryWrites=true&w=majority&appName=newdatabase'; // Replace with your MongoDB URI
-const client = new MongoClient(uri);
+require("dotenv").config();
+async function connectToMongoDB() {
+  const uri = process.env.MGDB_URI;
+  const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+  try {
+    await client.connect();
+    console.log('Connected to MongoDB successfully!');
+
+    // Export the connected client for use in other API functions
+    return client;
+  } catch (error) {
+    console.error('Error connecting to MongoDB:', error);
+    throw error;
+  }
+}
 
 async function log_db() {
   try {
-    await client.connect();
+    connectToMongoDB()
     const db = client.db("cps-leaderboard");
     const collection = db.collection("user-data");
 
