@@ -19,44 +19,44 @@ async function connectToMongoDB() {
   }
 }
 
-async function log_db() {
-  try {
-    await connectToMongoDB(); // Connect to MongoDB first
-    const db = client.db("cps-leaderboard");
-    const collection = db.collection("user-data");
+// async function log_db() {
+//   try {
+//     await connectToMongoDB(); // Connect to MongoDB first
+//     const db = client.db("cps-leaderboard");
+//     const collection = db.collection("user-data");
 
-    const query = { name: "legiaminh" };
-    const updateOperation = { $set: myData };
+//     const query = { name: "legiaminh" };
+//     const updateOperation = { $set: myData };
 
-    const result = await collection.updateOne(query, updateOperation);
+//     const result = await collection.updateOne(query, updateOperation);
 
-    if (result.modifiedCount > 0) {
-      messages.mess.push('Document updated successfully!');
-    } else {
-      // Improved error handling: Check for specific error messages and provide informative feedback
-      try {
-        await collection.insertOne(myData);
-        messages.mess.push('New document inserted successfully!');
-      } catch (insertError) {
-        if (insertError.code === 11000) { // Handle duplicate key error
-          messages.mess.push('Error: Document already exists. Please adjust your data or update using a different identifier.');
-        } else {
-          messages.mess.push(`Error inserting/updating data: ${insertError}`);
-        }
-      }
-    }
-  } catch (error) {
-    messages.mess.push(`Error adding/updating data: ${error}`);
-  } finally {
-    if (client) {
-      await client.close(); // Close the MongoDB connection
-    }
-  }
-}
+//     if (result.modifiedCount > 0) {
+//       messages.mess.push('Document updated successfully!');
+//     } else {
+//       // Improved error handling: Check for specific error messages and provide informative feedback
+//       try {
+//         await collection.insertOne(myData);
+//         messages.mess.push('New document inserted successfully!');
+//       } catch (insertError) {
+//         if (insertError.code === 11000) { // Handle duplicate key error
+//           messages.mess.push('Error: Document already exists. Please adjust your data or update using a different identifier.');
+//         } else {
+//           messages.mess.push(`Error inserting/updating data: ${insertError}`);
+//         }
+//       }
+//     }
+//   } catch (error) {
+//     messages.mess.push(`Error adding/updating data: ${error}`);
+//   } finally {
+//     if (client) {
+//       await client.close(); // Close the MongoDB connection
+//     }
+//   }
+// }
 
 module.exports = async (req, res) => {
   try {
-    await log_db();
+    await connectToMongoDB();
     res.send("action completed");
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
