@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 require('dotenv').config({ path: './api/.env' });
 
 const myDataSchema = new mongoose.Schema({
+  name: String,
   cps: Number,
   score: Number,
 });
