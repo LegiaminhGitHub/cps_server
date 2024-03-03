@@ -57,7 +57,7 @@ async function log_db() {
 module.exports = async (req, res) => {
   try {
     await log_db();
-    res.json(messages);
+    res.send("action completed");
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
   }
