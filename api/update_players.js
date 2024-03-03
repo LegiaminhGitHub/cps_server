@@ -59,6 +59,6 @@ module.exports = async (req, res) => {
     await connectToMongoDB();
     res.send("action completed");
   } catch (error) {
-    res.status(500).json({ eror: `Internal server error${error}` });
+    res.json({ eror: `Internal server error${error}` });
   }
 };
