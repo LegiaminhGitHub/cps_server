@@ -1,22 +1,47 @@
-const { MongoClient } = require('mongodb');
+const mongoose = require('mongoose');
+require('dotenv').config({ path: './api/.env' });
 
-const myData = {
-  cps: 9.4,
-  score: 36,
-};
+const myDataSchema = new mongoose.Schema({
+  cps: Number,
+  score: Number,
+});
 
-let messages = { mess: [] };
+const MyDataModel = mongoose.model('MyData', myDataSchema);
 
-const uri = "mongodb+srv://legiaminhoffice:16050356@newdatabase.idp7hup.mongodb.net/?retryWrites=true&w=majority&appName=newdatabase"; // Replace with your actual connection URI
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 async function connectToMongoDB() {
   try {
-    await client.connect(uri);
-    messages.mess.push('Connected to MongoDB successfully!');
+    await mongoose.connect(process.env.MGDB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log('Connected to MongoDB successfully!');
   } catch (error) {
-    messages.mess.push(`Error connecting to MongoDB: ${error}`);
+    console.error(`Error connecting to MongoDB: ${error}`);
   }
 }
+
+module.exports = async (req, res) => {
+  try {
+    await connectToMongoDB();
+
+    // Create or update a document
+    const query = { name: 'legiaminh' };
+    const update = { $set: myData };
+    const options = { upsert: true, new: true };
+    const result = await MyDataModel.findOneAndUpdate(query, update, options);
+
+    if (result) {
+      console.log('Document updated/inserted successfully:', result);
+      res.send('Action completed');
+    } else {
+      console.error('Error updating/inserting data');
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
 
 // async function log_db() {
 //   try {
@@ -52,12 +77,3 @@ async function connectToMongoDB() {
 //     }
 //   }
 // }
-
-module.exports = async (req, res) => {
-  try {
-    await connectToMongoDB();
-    res.send("action completed");
-  } catch (error) {
-    res.json({ eror: `Internal server error${error}` });
-  }
-};
