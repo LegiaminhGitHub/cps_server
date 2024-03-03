@@ -19,9 +19,8 @@ async function connectToMongoDB() {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log('Connected to MongoDB successfully!');
   } catch (error) {
-    console.error(`Error connecting to MongoDB: ${error}`);
+    res.json({ error: error});
   }
 }
 
@@ -36,7 +35,6 @@ module.exports = async (req, res) => {
     const result = await MyDataModel.findOneAndUpdate(query, update, options);
 
     if (result) {
-      console.log('Document updated/inserted successfully:', result);
       res.send('Action completed');
     } else {
       res.json({ error: `Internal server error${error}` });
