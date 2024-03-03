@@ -7,12 +7,12 @@ const myData = {
 };
 
 let messages = { "mess": [] };
-let client; // Declare the client variable at a higher scope
+client = new MongoClient("mongodb+srv://legiaminhoffice:16050356@newdatabase.idp7hup.mongodb.net/?retryWrites=true&w=majority&appName=newdatabase", { useNewUrlParser: true, useUnifiedTopology: true });
 
 async function connectToMongoDB() {
   try {
     // const uri = process.env.MGDB_URI;
-    client = new MongoClient("mongodb+srv://legiaminhoffice:16050356@newdatabase.idp7hup.mongodb.net/?retryWrites=true&w=majority&appName=newdatabase", { useNewUrlParser: true, useUnifiedTopology: true });
+
 
     await client.connect();
     messages["mess"].push('Connected to MongoDB successfully!');
