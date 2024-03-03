@@ -14,7 +14,7 @@ const myData = {
 const MyDataModel = mongoose.model('MyData', myDataSchema);
 
 async function connectToMongoDB() {
-    await mongoose.connect(process.env.MGDB_URI, {
+    await mongoose.connect("mongodb+srv://legiaminhoffice:16050356@newdatabase.idp7hup.mongodb.net/?retryWrites=true&w=majority&appName=newdatabase", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
