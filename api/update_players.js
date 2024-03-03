@@ -18,7 +18,6 @@ async function connectToMongoDB() {
     // Export the connected client for use in other API functions
     return client;
   } catch (error) {
-    console.error('Error connecting to MongoDB:', error);
     messages["mess"].push(`Error connecting to MongoDB:${error}`)
     throw error;
   }
