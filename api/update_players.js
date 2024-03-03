@@ -5,7 +5,7 @@ const myDataSchema = new mongoose.Schema({
   name: String,
   cps: Number,
   score: Number,
-});
+}, {collection:"cps-leaderboard"});
 const myData = {
   cps: 9.4,
   score: 36,
