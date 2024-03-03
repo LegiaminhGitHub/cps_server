@@ -1,17 +1,20 @@
-const { MongoClient } = require('mongodb');
+
 
 const myData = {
   cps: 9.4,
   score: 36,
 };
 
-require("dotenv").config();
 let messages = {"mess" : []} 
+
 async function connectToMongoDB() {
-  const uri = process.env.MGDB_URI;
-  const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
   try {
+    const { MongoClient } = require('mongodb');
+    require("dotenv").config();
+    const uri = process.env.MGDB_URI;
+    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+  
     await client.connect();
     messages["mess"].push('Connected to MongoDB successfully!')
 
