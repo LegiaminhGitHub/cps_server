@@ -6,6 +6,7 @@ const myData = {
 };
 
 require("dotenv").config();
+
 async function connectToMongoDB() {
   const uri = process.env.MGDB_URI;
   const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -24,33 +25,29 @@ async function connectToMongoDB() {
 
 async function log_db() {
   try {
-    connectToMongoDB()
+    const client = await connectToMongoDB(); // Connect to MongoDB first
     const db = client.db("cps-leaderboard");
     const collection = db.collection("user-data");
 
     const query = { name: "legiaminh" };
-    const updateOperation = { $set: data }; // Update the "cps" field
+    const updateOperation = { $set: myData }; // Update the "cps" and "score" fields
 
-    const result = await collection.updateOne(query, updateOperation);
+    const result = await collection.updateOne(query, updateOperation); // Perform the update
 
     if (result.modifiedCount > 0) {
-      messages.mess.push("Document updated successfully!");
-      res.json(messages);
+      console.log("Document updated successfully!");
     } else {
-      await collection.insertOne(data); // Insert a new document
-      messages.mess.push("New document inserted successfully!");
+      await collection.insertOne(myData); // Insert a new document if not found
+      console.log("New document inserted successfully!");
     }
   } catch (error) {
-    messages.mess.push("Error adding/updating data:", error);
-    res.json(messages);
+    console.error("Error adding/updating data:", error);
   } finally {
-    res.json(messages);
-    await client.close();
+    await client.close(); // Close the MongoDB connection
   }
 }
 
-
 module.exports = async (req, res) => {
-  messages.mess.push("Welcome to the server");
-  await log_db();
+  res.json({ message: "Welcome to the server" }); // Respond to the client immediately
+  await log_db(); // Update or insert data in the background
 };
