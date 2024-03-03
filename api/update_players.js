@@ -6,19 +6,20 @@ const myData = {
 };
 
 require("dotenv").config();
-
+let messages = {"mess" : []} 
 async function connectToMongoDB() {
   const uri = process.env.MGDB_URI;
   const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
   try {
     await client.connect();
-    console.log('Connected to MongoDB successfully!');
+    messages["mess"].push('Connected to MongoDB successfully!')
 
     // Export the connected client for use in other API functions
     return client;
   } catch (error) {
     console.error('Error connecting to MongoDB:', error);
+    messages["mess"].push(`Error connecting to MongoDB:${error}`)
     throw error;
   }
 }
@@ -36,18 +37,26 @@ async function log_db() {
 
     if (result.modifiedCount > 0) {
       console.log("Document updated successfully!");
+      messages["mess"].push('Document updated successfully!')
+      
     } else {
       await collection.insertOne(myData); // Insert a new document if not found
       console.log("New document inserted successfully!");
+      messages["mess"].push('New document inserted successfully!')
     }
   } catch (error) {
     console.error("Error adding/updating data:", error);
+    messages["mess"].push(`Error adding/updating data:, ${error}`)
   } finally {
     await client.close(); // Close the MongoDB connection
   }
 }
 
 module.exports = async (req, res) => {
-  res.json({ message: "Welcome to the server" }); // Respond to the client immediately
-  await log_db(); // Update or insert data in the background
+  try{
+    await log_db()
+  }
+  catch{
+    res.json(messages)
+  }
 };
