@@ -53,6 +53,6 @@ module.exports = async (req, res) => {
     await log_db()
   }
   catch{
-    res.json(messages)
+    res.json(messages["mess"])
   }
 };
