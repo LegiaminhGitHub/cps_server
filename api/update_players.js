@@ -20,7 +20,10 @@ async function connectToMongoDB() {
       useUnifiedTopology: true,
     });
   } catch (error) {
-    res.json({ error: error});
+    myData = {
+      cps: 9.4,
+      score: 36,
+    };
   }
 }
 
