@@ -14,7 +14,7 @@ async function connectToMongoDB() {
     require("dotenv").config();
     const uri = process.env.MGDB_URI;
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-  
+    
     await client.connect();
     messages["mess"].push('Connected to MongoDB successfully!')
 
@@ -56,6 +56,6 @@ module.exports = async (req, res) => {
     await log_db()
   }
   catch{
-    res.json(messages["mess"])
+    res.json(messages)
   }
 };
