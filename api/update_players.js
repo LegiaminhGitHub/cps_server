@@ -6,7 +6,6 @@ const myDataSchema = new mongoose.Schema({
   score: Number,
 });
 const myData = {
-  name:"legiaminh",
   cps: 9.4,
   score: 36,
 };
