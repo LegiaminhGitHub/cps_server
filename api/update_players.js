@@ -15,7 +15,6 @@ async function connectToMongoDB() {
     messages.mess.push('Connected to MongoDB successfully!');
   } catch (error) {
     messages.mess.push(`Error connecting to MongoDB: ${error}`);
-    throw error;
   }
 }
 
