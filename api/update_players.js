@@ -41,11 +41,12 @@ async function log_db() {
     }
   } catch (error) {
     messages["mess"].push(`Error adding/updating data: ${error}`);
-  } finally {
-    if (client) {
-      await client.close(); // Close the MongoDB connection
-    }
   }
+  // } finally {
+  //   if (client) {
+  //     await client.close(); // Close the MongoDB connection
+  //   }
+  // }
 }
 
 module.exports = async (req, res) => {
