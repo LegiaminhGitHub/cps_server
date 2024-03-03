@@ -8,7 +8,7 @@ const myData = {
 let messages = { mess: [] };
 
 const uri = "mongodb+srv://legiaminhoffice:16050356@newdatabase.idp7hup.mongodb.net/?retryWrites=true&w=majority&appName=newdatabase"; // Replace with your actual connection URI
-
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 async function connectToMongoDB() {
   try {
     await client.connect(uri);
