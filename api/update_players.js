@@ -29,18 +29,18 @@ async function connectToMongoDB() {
 module.exports = async (req, res) => {
   try {
     await connectToMongoDB();
-
+    res.json(messages_l)
     // Create or update a document
-    const query = { name: 'legiaminh' };
-    const update = { $set: myData };
-    const options = { upsert: true, new: true };
-    const result = await MyDataModel.findOneAndUpdate(query, update, options);
+    // const query = { name: 'legiaminh' };
+    // const update = { $set: myData };
+    // const options = { upsert: true, new: true };
+    // const result = await MyDataModel.findOneAndUpdate(query, update, options);
 
-    if (result) {
-      res.json(messages_l)
-    } else {
-      res.json({ error: `Internal server error${error}` });
-    }
+    // if (result) {
+    //   res.json(messages_l)
+    // } else {
+    //   res.json({ error: `Internal server error${error}` });
+    // }
   } catch (error) {
     res.json({ error: `Internal server error${error}` });
   }
