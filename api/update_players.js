@@ -32,7 +32,7 @@ module.exports = async (req, res) => {
     const result = await MyDataModel.findOneAndUpdate(query, update, options);
 
     if (result) {
-      res.send('Action completed');
+      res.json({ message : "Update completed"})
     } else {
       res.json({ error: `Internal server error${error}` });
     }
