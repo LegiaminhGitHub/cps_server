@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
-
+var messages_l = {mess : []}
 const myDataSchema = new mongoose.Schema({
   name: String,
   cps: Number,
@@ -14,10 +14,15 @@ const myData = {
 const MyDataModel = mongoose.model('MyData', myDataSchema);
 
 async function connectToMongoDB() {
+  try{
     await mongoose.connect("mongodb+srv://legiaminhoffice:16050356@newdatabase.idp7hup.mongodb.net/?retryWrites=true&w=majority&appName=newdatabase", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
+  }
+  catch(error){
+    messages_l.mess.push(error)
+  }
 
 }
 
@@ -32,7 +37,7 @@ module.exports = async (req, res) => {
     const result = await MyDataModel.findOneAndUpdate(query, update, options);
 
     if (result) {
-      res.json({ message : "Update completed"})
+      res.json(messages_l)
     } else {
       res.json({ error: `Internal server error${error}` });
     }
